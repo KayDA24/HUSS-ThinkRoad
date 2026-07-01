@@ -276,9 +276,6 @@ button {
 
 .student-shell {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
   min-height: 100vh;
   overflow: hidden;
   background:
@@ -291,12 +288,11 @@ button {
   position: relative;
   z-index: 2;
   display: flex;
-  flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 8px 34px 0;
+  padding: 12px 34px 0;
 }
 
 .student-brand,
@@ -332,20 +328,15 @@ button {
 .student-dashboard {
   position: relative;
   z-index: 2;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-height: 0;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 34px 16px;
+  padding: 0 34px 20px;
 }
 
 .student-hero {
   display: flex;
-  flex-shrink: 0;
   justify-content: center;
-  margin: 0 0 8px;
+  margin-bottom: 12px;
   text-align: center;
 }
 
@@ -390,8 +381,7 @@ button {
 .student-grid {
   display: grid;
   grid-template-columns: 280px minmax(560px, 1fr) 320px;
-  flex: 1;
-  min-height: 0;
+  height: calc(100vh - 132px);
   gap: 18px;
   align-items: stretch;
 }
@@ -592,23 +582,10 @@ button {
   }
 }
 
-.flow-map-panel {
-  display: flex;
-  flex-direction: column;
-}
-
-.flow-map-panel .flow-map {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-}
-
 .student-input {
   position: sticky;
   bottom: 0;
   display: flex;
-  flex-shrink: 0;
-  align-items: flex-start;
   gap: 10px;
   margin-top: auto;
   border-top: 1px solid rgba(244, 114, 182, 0.18);
@@ -621,14 +598,12 @@ button {
   flex: 1;
   border: 1px solid rgba(244, 114, 182, 0.2);
   border-radius: 18px;
-  min-height: 76px;
+  min-height: 50px;
   max-height: 120px;
   padding: 14px 16px;
   background: #fff7fb;
   color: #8a3f5d;
-  line-height: 1.55;
   outline: none;
-  overflow-y: auto;
   resize: vertical;
 }
 
