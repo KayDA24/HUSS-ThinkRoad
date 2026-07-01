@@ -1,4 +1,4 @@
-import { Check, CheckCircle2, Map, MessageCircle, Sparkles } from "lucide-react";
+import { Check, CheckCircle2, Map, MessageCircle } from "lucide-react";
 import { KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Mascot } from "../components/Mascot";
 import { Card } from "../components/ui";
@@ -27,7 +27,7 @@ export function StudentDashboard() {
     }
   ]);
   const [currentTurn, setCurrentTurn] = useState(0);
-  const [answer, setAnswer] = useState(studentTurns[0].student);
+  const [answer, setAnswer] = useState(compactAnswer(studentTurns[0].student));
   const [isThinking, setIsThinking] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -90,7 +90,7 @@ export function StudentDashboard() {
         }
       ]);
       setCurrentTurn(nextTurnIndex);
-      setAnswer(nextTurn.student);
+      setAnswer(compactAnswer(nextTurn.student));
       setIsThinking(false);
     }, 1200);
   }
@@ -217,7 +217,10 @@ export function StudentDashboard() {
 
       <div className="student-orb orb-one" />
       <div className="student-orb orb-two" />
-      <Sparkles className="student-sparkle" size={28} />
     </StudentLayout>
   );
+}
+
+function compactAnswer(value: string) {
+  return value.replace(/\n{2,}/g, "\n");
 }

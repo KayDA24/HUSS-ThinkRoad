@@ -1,4 +1,4 @@
-import { Bell, Settings } from "lucide-react";
+import { Bell } from "lucide-react";
 
 export function ProfessorHeader({ title }: { title: string }) {
   return (
@@ -10,9 +10,6 @@ export function ProfessorHeader({ title }: { title: string }) {
       <div className="header-actions">
         <button aria-label="알림">
           <Bell size={20} />
-        </button>
-        <button aria-label="설정">
-          <Settings size={20} />
         </button>
       </div>
     </header>

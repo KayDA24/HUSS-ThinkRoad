@@ -26,8 +26,9 @@ export function ProfessorAnalysis() {
                     <span className="node-index">{index + 1}</span>
                     <strong>{step.title}</strong>
                     <p>{step.summary}</p>
+                    <small>원문 보기</small>
                   </div>
-                  {index < flowSteps.length - 1 && index !== 3 ? (
+                  {index < flowSteps.length - 1 ? (
                     <div className="node-connector" aria-hidden="true">
                       <span />
                       <ArrowRight size={18} />
@@ -36,20 +37,6 @@ export function ProfessorAnalysis() {
                 </div>
               );
             })}
-          </div>
-          <div className="analysis-summary-grid">
-            <div>
-              <span>주장 변화</span>
-              <strong>결과물 중심 평가의 한계 인식 → 과정 포함 평가 설계</strong>
-            </div>
-            <div>
-              <span>핵심 전환점</span>
-              <strong>AI 사용 여부보다 평가 방식 설계가 중요함</strong>
-            </div>
-            <div>
-              <span>교수 확인 포인트</span>
-              <strong>최종 주장, 전환 지점, 과제 유형별 모델링</strong>
-            </div>
           </div>
         </Card>
 

@@ -220,7 +220,8 @@ button {
 }
 
 .home-card {
-  width: 760px;
+  width: 960px;
+  max-width: calc(100vw - 96px);
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 36px;
   padding: 56px;
@@ -245,6 +246,7 @@ button {
   color: #667085;
   font-size: 18px;
   line-height: 1.7;
+  white-space: nowrap;
 }
 
 .home-actions {
@@ -1148,7 +1150,12 @@ button {
   display: grid;
   grid-template-columns: minmax(620px, 1fr) minmax(360px, 0.72fr);
   gap: 18px;
-  align-items: start;
+  align-items: stretch;
+}
+
+.thinking-path-card,
+.radar-card {
+  height: 100%;
 }
 
 .analysis-heading-tools {
@@ -1169,18 +1176,196 @@ button {
   min-width: 0;
 }
 
+.thinking-road-map {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(118px, 1fr));
+  grid-template-rows: 72px 150px 150px 154px;
+  min-height: 526px;
+  overflow: hidden;
+  border-radius: 26px;
+  gap: 12px 14px;
+  padding: 18px;
+  background:
+    radial-gradient(circle at 18% 38%, rgba(96, 165, 250, 0.12), transparent 17%),
+    radial-gradient(circle at 72% 20%, rgba(37, 99, 235, 0.12), transparent 20%),
+    linear-gradient(180deg, #f8fbff 0%, #edf7f5 100%);
+}
+
+.thinking-road-map > div:first-child {
+  position: relative;
+  grid-column: 1 / 4;
+  grid-row: 1;
+  z-index: 3;
+}
+
+.thinking-road-map > div:first-child span {
+  color: #5d7899;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.road-lines {
+  position: absolute;
+  inset: 70px 22px 92px;
+  z-index: 1;
+  width: calc(100% - 44px);
+  height: calc(100% - 162px);
+  fill: none;
+  pointer-events: none;
+}
+
+.road-lines path {
+  stroke: #8bb8e8;
+  stroke-dasharray: 8 8;
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+
+.road-lines .road-strong {
+  stroke: #2563eb;
+  stroke-dasharray: none;
+  stroke-width: 5;
+}
+
+.map-landscape {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hill {
+  position: absolute;
+  bottom: 26px;
+  border-radius: 999px 999px 0 0;
+  background: rgba(125, 211, 191, 0.18);
+}
+
+.hill-one {
+  left: 18px;
+  width: 210px;
+  height: 70px;
+}
+
+.hill-two {
+  right: 54px;
+  width: 290px;
+  height: 92px;
+}
+
+.tree {
+  position: absolute;
+  bottom: 76px;
+  width: 14px;
+  height: 42px;
+  border-radius: 12px 12px 3px 3px;
+  background: #83c5ae;
+  opacity: 0.55;
+}
+
+.tree::before {
+  content: "";
+  position: absolute;
+  left: -13px;
+  top: -18px;
+  width: 40px;
+  height: 32px;
+  border-radius: 50%;
+  background: #b7e4d6;
+}
+
+.tree-one {
+  left: 88px;
+}
+
+.tree-two {
+  right: 126px;
+  transform: scale(1.25);
+}
+
+.mountain {
+  position: absolute;
+  right: 26px;
+  bottom: 18px;
+  width: 130px;
+  height: 110px;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background: linear-gradient(135deg, #9bc3ee, #dbeafe);
+  opacity: 0.82;
+}
+
+.road-node {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-width: 0;
+}
+
+.road-node-1 {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: end;
+}
+
+.road-node-2 {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  transform: translateY(-24px);
+}
+
+.road-node-3 {
+  grid-column: 3;
+  grid-row: 2;
+  align-self: start;
+  transform: translateY(-18px);
+}
+
+.road-node-4 {
+  grid-column: 4;
+  grid-row: 2;
+  align-self: end;
+}
+
+.road-node-5 {
+  grid-column: 3;
+  grid-row: 3;
+  align-self: center;
+}
+
+.road-node-6 {
+  grid-column: 1;
+  grid-row: 3;
+  align-self: end;
+  transform: translateX(22px);
+}
+
+.road-node-7 {
+  grid-column: 3 / 5;
+  grid-row: 4;
+  align-self: start;
+  justify-self: center;
+  width: min(230px, 100%);
+}
+
 .thinking-node {
+  position: relative;
   display: grid;
   width: 100%;
   min-height: 150px;
   gap: 8px;
   border: 1px solid rgba(96, 165, 250, 0.24);
-  border-radius: 22px;
+  border-radius: 20px;
   padding: 14px;
   background: linear-gradient(135deg, #ffffff, #eff6ff);
   color: #48627f;
   text-align: left;
-  box-shadow: 0 18px 42px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 16px 38px rgba(37, 99, 235, 0.12);
+}
+
+.road-node-7 .thinking-node {
+  min-height: 142px;
 }
 
 .thinking-node.selected {
@@ -1208,6 +1393,17 @@ button {
   background: #dbeafe;
   color: #1d4ed8;
   font-weight: 900;
+}
+
+.node-mini-icon {
+  position: absolute;
+  right: 13px;
+  top: 13px;
+  color: #9eb5d3;
+}
+
+.thinking-node.final .node-mini-icon {
+  color: #fde68a;
 }
 
 .thinking-node.final .node-index {
@@ -1290,6 +1486,11 @@ button {
   background: #eaf3ff;
 }
 
+.analysis-summary-grid svg {
+  margin-bottom: 10px;
+  color: #2563eb;
+}
+
 .analysis-summary-grid span,
 .analysis-summary-grid strong {
   display: block;
@@ -1350,6 +1551,8 @@ button {
 }
 
 .radar-card {
+  display: flex;
+  flex-direction: column;
   min-height: 0;
 }
 
@@ -1429,7 +1632,7 @@ button {
 .radar-growth-summary {
   display: grid;
   gap: 8px;
-  margin-top: 18px;
+  margin-top: auto;
   border-radius: 20px;
   padding: 16px;
   background: #f3f8ff;
