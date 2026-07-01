@@ -137,7 +137,6 @@ export function StudentDashboard() {
                     <>
                       <Mascot size="medium" />
                       <div className="coach-bubble">
-                        <div className="turn-chip">{message.insight}</div>
                         <h3>{message.title}</h3>
                         <p>{message.text}</p>
                       </div>
