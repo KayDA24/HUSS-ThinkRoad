@@ -53,7 +53,7 @@ export function StudentDashboard() {
       return;
     }
 
-    const trimmedAnswer = answer.trim();
+    const trimmedAnswer = compactAnswer(answer).trim();
     if (!trimmedAnswer) return;
 
     const nextTurnIndex = currentTurn + 1;
@@ -168,11 +168,11 @@ export function StudentDashboard() {
             </div>
             <div className="student-input">
               <textarea
-                value={isComplete ? "모든 사고 코칭을 완료했습니다. 최종 과제를 제출할 수 있습니다." : answer}
-                onChange={(event) => setAnswer(event.target.value)}
+                value={isThinking ? "" : isComplete ? "모든 사고 코칭을 완료했습니다. 최종 과제를 제출할 수 있습니다." : compactAnswer(answer)}
+                onChange={(event) => setAnswer(compactAnswer(event.target.value))}
                 onKeyDown={handleKeyDown}
                 readOnly={isComplete || isThinking}
-                placeholder={studentTurns[currentTurn].student}
+                placeholder={compactAnswer(studentTurns[currentTurn].student)}
                 rows={2}
               />
               <button onClick={handleSend} disabled={isThinking || (!isComplete && !answer.trim())}>
