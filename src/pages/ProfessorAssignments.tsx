@@ -1,4 +1,4 @@
-import { ExternalLink, Plus, UploadCloud, X } from "lucide-react";
+import { ExternalLink, Plus, Trash2, UploadCloud, X } from "lucide-react";
 import { FormEvent, useEffect, useState } from "react";
 import { Badge, Card, ProgressBar } from "../components/ui";
 import { assignments } from "../data/thinkroadData";
@@ -21,6 +21,23 @@ type AssignmentCard = {
 const storageKey = "thinkroad-professor-assignments";
 const coachingOptions = ["정답 제공 금지", "모범답안 제공 금지", "예시 결론 제공 금지", "질문 기반 사고 확장만 허용"];
 
+function loadSavedAssignments() {
+  const saved = localStorage.getItem(storageKey);
+  if (!saved) return [];
+
+  try {
+    const parsed = JSON.parse(saved) as AssignmentCard[];
+    return parsed.filter((assignment) => assignment.title !== "2");
+  } catch {
+    localStorage.removeItem(storageKey);
+    return [];
+  }
+}
+
+function isUserCreatedAssignment(assignment: AssignmentCard) {
+  return !assignments.some((base) => base.title === assignment.title);
+}
+
 export function ProfessorAssignments() {
   const [assignmentList, setAssignmentList] = useState<AssignmentCard[]>(assignments);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,16 +52,18 @@ export function ProfessorAssignments() {
   });
 
   useEffect(() => {
-    const saved = localStorage.getItem(storageKey);
-    if (!saved) return;
-
-    try {
-      const parsed = JSON.parse(saved) as AssignmentCard[];
+    const parsed = loadSavedAssignments();
+    localStorage.setItem(storageKey, JSON.stringify(parsed));
+    if (parsed.length > 0) {
       setAssignmentList([...assignments, ...parsed]);
-    } catch {
-      localStorage.removeItem(storageKey);
     }
   }, []);
+
+  function handleDelete(title: string) {
+    const nextSavedAssignments = loadSavedAssignments().filter((assignment) => assignment.title !== title);
+    localStorage.setItem(storageKey, JSON.stringify(nextSavedAssignments));
+    setAssignmentList([...assignments, ...nextSavedAssignments]);
+  }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -63,7 +82,7 @@ export function ProfessorAssignments() {
       references: form.references.trim(),
       coachingRules: form.coachingRules
     };
-    const savedAssignments = assignmentList.filter((assignment) => !assignments.some((base) => base.title === assignment.title));
+    const savedAssignments = assignmentList.filter(isUserCreatedAssignment);
     const nextSavedAssignments = [...savedAssignments, newAssignment];
 
     localStorage.setItem(storageKey, JSON.stringify(nextSavedAssignments));
@@ -108,7 +127,14 @@ export function ProfessorAssignments() {
               <Badge tone={assignment.tone === "done" ? "green" : assignment.tone === "review" ? "yellow" : assignment.tone === "draft" ? "gray" : "blue"}>
                 {assignment.status}
               </Badge>
-              <span>{assignment.type}</span>
+              <div className="assignment-card-actions">
+                <span>{assignment.type}</span>
+                {isUserCreatedAssignment(assignment) ? (
+                  <button type="button" className="icon-button assignment-delete-button" aria-label="과제 삭제" onClick={() => handleDelete(assignment.title)}>
+                    <Trash2 size={16} />
+                  </button>
+                ) : null}
+              </div>
             </div>
             <h2>{assignment.title}</h2>
             {assignment.description ? <p className="assignment-description">{assignment.description}</p> : null}

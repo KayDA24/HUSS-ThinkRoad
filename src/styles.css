@@ -1055,6 +1055,20 @@ button {
   font-weight: 800;
 }
 
+.assignment-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.assignment-delete-button {
+  color: #94a3b8;
+}
+
+.assignment-delete-button:hover {
+  color: #ef4444;
+}
+
 .assignment-card h2 {
   margin: 0;
   color: #15345e;
