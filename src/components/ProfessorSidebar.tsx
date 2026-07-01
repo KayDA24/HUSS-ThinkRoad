@@ -1,5 +1,5 @@
 import { BarChart3, Bell, ClipboardList, LayoutDashboard, Users } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Mascot } from "./Mascot";
 
 const menu = [
@@ -12,13 +12,13 @@ const menu = [
 export function ProfessorSidebar() {
   return (
     <aside className="professor-sidebar">
-      <div className="professor-brand">
+      <Link to="/" className="professor-brand" aria-label="첫 페이지로 이동">
         <Mascot size="small" calm />
         <div>
           <strong>ThinkRoad</strong>
           <span>교수자 도구</span>
         </div>
-      </div>
+      </Link>
       <nav>
         {menu.map((item) => {
           const Icon = item.icon;

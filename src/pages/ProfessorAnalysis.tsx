@@ -28,7 +28,7 @@ export function ProfessorAnalysis() {
                     <p>{step.summary}</p>
                     <small>원문 보기</small>
                   </div>
-                  {index < flowSteps.length - 1 ? (
+                  {index < flowSteps.length - 1 && index !== 3 ? (
                     <div className="node-connector" aria-hidden="true">
                       <span />
                       <ArrowRight size={18} />

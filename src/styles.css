@@ -834,6 +834,11 @@ button {
   letter-spacing: -0.035em;
 }
 
+.professor-header .eyebrow {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
 .header-assignment {
   max-width: 820px;
   margin: 8px 0 0;
