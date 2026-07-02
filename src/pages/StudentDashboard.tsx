@@ -138,7 +138,7 @@ export function StudentDashboard() {
                       <Mascot size="medium" />
                       <div className="coach-bubble">
                         <h3>{message.title}</h3>
-                        <p>{message.text}</p>
+                        <p>{renderFormattedText(message.text)}</p>
                       </div>
                     </>
                   ) : (
@@ -222,4 +222,14 @@ export function StudentDashboard() {
 
 function compactAnswer(value: string) {
   return value.replace(/\n{2,}/g, "\n");
+}
+
+function renderFormattedText(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+
+    return part;
+  });
 }
